@@ -21,6 +21,8 @@
                                 class="project-card" 
                                 v-for="project in projects" 
                                 :key="project.id"
+                                @click="handleCardClick(project)"
+                                :class="{ 'clickable': true }"
                             >
                                 <div class="project-image">
                                     <img :src="project.image" :alt="project.title" />
@@ -58,6 +60,47 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Lightbox -->
+        <div v-if="lightboxOpen" class="lightbox-overlay" @click="closeLightbox">
+            <div class="lightbox-container" @click.stop>
+                <button class="lightbox-close" @click="closeLightbox">×</button>
+                <div class="lightbox-content">
+                    <div class="lightbox-header">
+                        <h3>{{ currentProject.title }}</h3>
+                        <p>{{ currentLightboxImageIndex + 1 }} / {{ currentProject.images?.length || 0 }}</p>
+                    </div>
+                    <div class="lightbox-image-container">
+                        <button 
+                            class="lightbox-nav prev" 
+                            @click="prevLightboxImage"
+                            :disabled="currentLightboxImageIndex === 0"
+                        >‹</button>
+                        <img 
+                            :src="currentProject.images?.[currentLightboxImageIndex]" 
+                            :alt="`${currentProject.title} - 圖片 ${currentLightboxImageIndex + 1}`"
+                            class="lightbox-image"
+                        />
+                        <button 
+                            class="lightbox-nav next" 
+                            @click="nextLightboxImage"
+                            :disabled="currentLightboxImageIndex === (currentProject.images?.length || 1) - 1"
+                        >›</button>
+                    </div>
+                    <div class="lightbox-thumbnails">
+                        <img 
+                            v-for="(image, index) in currentProject.images" 
+                            :key="index"
+                            :src="image" 
+                            :alt="`縮圖 ${index + 1}`"
+                            class="lightbox-thumbnail"
+                            :class="{ active: index === currentLightboxImageIndex }"
+                            @click="currentLightboxImageIndex = index"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </template>
 
@@ -66,6 +109,9 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const currentSlide = ref(0)
 const sliderContainer = ref(null)
+const lightboxOpen = ref(false)
+const currentProject = ref({})
+const currentLightboxImageIndex = ref(0)
 let startX = 0
 let isDragging = false
 
@@ -74,24 +120,35 @@ const baseUrl = import.meta.env.BASE_URL
 const projects = ref([
     {
         id: 1,
-        title: '專案名稱 1',
-        description: '這是一個示例專案的描述',
-        image: `${baseUrl}sample/sample-1.png`,
-        technologies: ['Vue.js', 'SCSS', 'JavaScript']
+        title: '痞客邦首頁',
+        description: '痞客邦全新首頁',
+        image: `${baseUrl}sample/sample-5.png`,
+        technologies: ['Nuxt2', 'SCSS', 'JavaScript'],
+        type: 'site',
+        url: 'https://www.pixnet.net/'
     },
     {
         id: 2,
-        title: '專案名稱 2',
-        description: '這是另一個示例專案的描述',
+        title: 'Array APV後台前端',
+        description: '這是一個設計作品的圖片集',
         image: `${baseUrl}sample/sample-2.png`,
-        technologies: ['Vue.js', 'TypeScript', 'Vite']
+        technologies: ['Vue3', 'Pinia', 'UI/UX'],
+        type: 'image',
+        images: [
+            `${baseUrl}sample/sample-2.png`,
+            `${baseUrl}sample/sample-3.png`,
+            `${baseUrl}sample/sample-4.png`,
+            `${baseUrl}sample/sample-1.png`
+        ]
     },
     {
         id: 3,
-        title: '專案名稱 3',
-        description: '這是另一個示例專案的描述',
+        title: '專案網站 2',
+        description: '這是另一個網站專案的描述',
         image: `${baseUrl}sample/sample-3.png`,
-        technologies: ['Vue.js', 'TypeScript', 'Vite']
+        technologies: ['Vue.js', 'TypeScript', 'Vite'],
+        type: 'site',
+        url: 'https://example2.com'
     }
 ])
 
@@ -109,6 +166,42 @@ const prevSlide = () => {
 
 const goToSlide = (index) => {
     currentSlide.value = index
+}
+
+// 處理卡片點擊
+const handleCardClick = (project) => {
+    if (project.type === 'site' && project.url) {
+        window.open(project.url, '_blank')
+    } else if (project.type === 'image' && project.images) {
+        openLightbox(project)
+    }
+}
+
+// Lightbox 功能
+const openLightbox = (project) => {
+    currentProject.value = project
+    currentLightboxImageIndex.value = 0
+    lightboxOpen.value = true
+    document.body.style.overflow = 'hidden'
+}
+
+const closeLightbox = () => {
+    lightboxOpen.value = false
+    currentProject.value = {}
+    currentLightboxImageIndex.value = 0
+    document.body.style.overflow = 'auto'
+}
+
+const nextLightboxImage = () => {
+    if (currentLightboxImageIndex.value < (currentProject.value.images?.length || 0) - 1) {
+        currentLightboxImageIndex.value++
+    }
+}
+
+const prevLightboxImage = () => {
+    if (currentLightboxImageIndex.value > 0) {
+        currentLightboxImageIndex.value--
+    }
 }
 
 // 觸控滑動支援
@@ -153,6 +246,8 @@ onUnmounted(() => {
         sliderContainer.value.removeEventListener('touchmove', handleTouchMove)
         sliderContainer.value.removeEventListener('touchend', handleTouchEnd)
     }
+    // 確保在組件卸載時恢復 body overflow
+    document.body.style.overflow = 'auto'
 })
 </script>
 
@@ -254,8 +349,9 @@ onUnmounted(() => {
                         overflow: hidden;
                         box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
                         transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        cursor: pointer;
                         
-                        &:hover {
+                        &.clickable:hover {
                             transform: translateY(-10px);
                             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
                         }
@@ -298,6 +394,7 @@ onUnmounted(() => {
                                 display: flex;
                                 flex-wrap: wrap;
                                 gap: 0.6rem;
+                                margin-bottom: 1rem;
                                 
                                 .tech-tag {
                                     background-color: var(--primary-color);
@@ -405,6 +502,173 @@ onUnmounted(() => {
                 }
             }
         }
+    }
+}
+
+// Lightbox 樣式
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+    
+    .lightbox-container {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        animation: slideUp 0.3s ease;
+        
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+            
+            &:hover {
+                background: rgba(0, 0, 0, 0.9);
+            }
+        }
+        
+        .lightbox-content {
+            .lightbox-header {
+                padding: 1.5rem;
+                background: var(--card-bg);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                
+                h3 {
+                    margin: 0;
+                    color: var(--text-color);
+                    font-size: 1.3rem;
+                }
+                
+                p {
+                    margin: 0;
+                    color: var(--text-secondary);
+                    font-size: 0.9rem;
+                }
+            }
+            
+            .lightbox-image-container {
+                position: relative;
+                background: #f5f5f5;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 400px;
+                max-height: 60vh;
+                
+                .lightbox-image {
+                    max-width: 100%;
+                    max-height: 100%;
+                    object-fit: contain;
+                }
+                
+                .lightbox-nav {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: rgba(0, 0, 0, 0.7);
+                    color: white;
+                    border: none;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    &:hover:not(:disabled) {
+                        background: rgba(0, 0, 0, 0.9);
+                        transform: translateY(-50%) scale(1.1);
+                    }
+                    
+                    &:disabled {
+                        background: rgba(0, 0, 0, 0.3);
+                        cursor: not-allowed;
+                    }
+                    
+                    &.prev {
+                        left: 15px;
+                    }
+                    
+                    &.next {
+                        right: 15px;
+                    }
+                }
+            }
+            
+            .lightbox-thumbnails {
+                display: flex;
+                gap: 0.5rem;
+                padding: 1rem;
+                background: var(--card-bg);
+                overflow-x: auto;
+                
+                .lightbox-thumbnail {
+                    width: 60px;
+                    height: 40px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    opacity: 0.6;
+                    border: 2px solid transparent;
+                    
+                    &:hover {
+                        opacity: 0.8;
+                    }
+                    
+                    &.active {
+                        opacity: 1;
+                        border-color: var(--primary-color);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 </style>
