@@ -1,5 +1,5 @@
 <template>
-    <section class="skill-section">
+    <section id="skills" class="skill-section">
         <div class="container">
             <h2 class="section-title">技能專長</h2>
             <div class="skills-grid">

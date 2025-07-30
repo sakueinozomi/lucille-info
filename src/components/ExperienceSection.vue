@@ -1,5 +1,5 @@
 <template>
-    <section class="experience-section">
+    <section id="experience" class="experience-section">
         <div class="container">
             <h2 class="section-title">工作經歷</h2>
             <div class="experience-slider">
@@ -88,7 +88,7 @@ const experiences = ref([
         period: '2022 - 2024',
         position: '前端工程師',
         company: 'PIXNET(城邦集團)',
-        description: '與後端團隊協作，並使用 Nuxt2 開發全新痞客幫首頁。',
+        description: '與後端團隊協作，並使用 Nuxt2 開發全新痞客邦首頁。',
         responsibilities: [
             '使用Nuxt2與各式套件進行前端頁面開發，以提升頁面SEO與翻新首頁畫面。',
             '使用Vue2/Vue3進行活動頁面開發。',
@@ -401,7 +401,6 @@ onUnmounted(() => {
             .slider-wrapper {
                 .slider-btn {
                     width: 40px;
-                    height: 40px;
                     font-size: 1.2rem;
                     
                     &.prev-btn {

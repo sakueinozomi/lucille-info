@@ -5,17 +5,15 @@
                 <div class="footer-info">
                     <h3>聯絡資訊</h3>
                     <div class="contact-info">
-                        <p>Email: example@email.com</p>
-                        <p>電話: +886 123 456 789</p>
+                        <p>Email: sakuei@gmail.com</p>
                     </div>
                 </div>
                 
                 <div class="footer-social">
                     <h3>社群媒體</h3>
                     <div class="social-links">
-                        <a href="#" class="social-link">GitHub</a>
-                        <a href="#" class="social-link">LinkedIn</a>
-                        <a href="#" class="social-link">Twitter</a>
+                        <a href="https://github.com/sakueinozomi" class="social-link">GitHub</a>
+                        <a href="https://tw.linkedin.com/in/lucille-chiang-52a21516b" class="social-link">LinkedIn</a>
                     </div>
                 </div>
                 
