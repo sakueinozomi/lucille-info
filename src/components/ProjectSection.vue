@@ -45,42 +45,53 @@ const projects = ref([
 
 <style lang="scss" scoped>
 .project-section {
-  padding: 4rem 0;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0;
   background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   .container {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
   }
   
   .section-title {
     text-align: center;
-    margin-bottom: 3rem;
-    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    font-size: 3.5rem;
     color: var(--text-color);
+    font-weight: 700;
   }
   
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
     
     .project-card {
       background-color: var(--card-bg);
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       
       &:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        transform: translateY(-10px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
       }
       
       .project-image {
         width: 100%;
-        height: 200px;
+        height: 220px;
         overflow: hidden;
         
         img {
@@ -96,33 +107,54 @@ const projects = ref([
       }
       
       .project-content {
-        padding: 1.5rem;
+        padding: 2rem;
         
         h3 {
-          margin-bottom: 1rem;
+          margin-bottom: 1.2rem;
           color: var(--text-color);
-          font-size: 1.4rem;
+          font-size: 1.6rem;
+          font-weight: 600;
         }
         
         p {
           color: var(--text-secondary);
-          line-height: 1.6;
-          margin-bottom: 1.5rem;
+          line-height: 1.7;
+          margin-bottom: 1.8rem;
+          font-size: 1.05rem;
         }
         
         .project-tech {
           display: flex;
           flex-wrap: wrap;
-          gap: 0.5rem;
+          gap: 0.6rem;
           
           .tech-tag {
             background-color: var(--primary-color);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
             font-weight: 500;
           }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .project-section {
+    .section-title {
+      font-size: 2.5rem;
+    }
+    
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      
+      .project-card {
+        .project-content {
+          padding: 1.5rem;
         }
       }
     }

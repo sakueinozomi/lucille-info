@@ -43,55 +43,72 @@
 
 <style lang="scss" scoped>
 .footer-section {
-  background-color: var(--bg-dark);
+  background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a2e 100%);
   color: var(--text-light);
-  padding: 3rem 0 1rem;
+  min-height: 40vh;
+  width: 100vw;
+  padding: 3rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   .container {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
   }
   
   .footer-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
     margin-bottom: 2rem;
     
     .footer-info,
     .footer-social,
     .footer-links {
+      text-align: center;
+      
       h3 {
         color: var(--primary-color);
-        margin-bottom: 1rem;
-        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.4rem;
+        font-weight: 600;
       }
     }
     
     .contact-info {
       p {
-        margin-bottom: 0.5rem;
-        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 0.8rem;
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 1.05rem;
       }
     }
     
     .social-links {
       display: flex;
-      gap: 1rem;
+      gap: 1.2rem;
+      justify-content: center;
       
       .social-link {
         color: rgba(255, 255, 255, 0.8);
         text-decoration: none;
-        padding: 0.5rem 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 4px;
+        padding: 0.8rem 1.5rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
         transition: all 0.3s ease;
+        font-weight: 500;
         
         &:hover {
           color: var(--primary-color);
           border-color: var(--primary-color);
-          transform: translateY(-2px);
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(100, 108, 255, 0.3);
         }
       }
     }
@@ -99,12 +116,14 @@
     .footer-nav {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.8rem;
+      align-items: center;
       
       a {
         color: rgba(255, 255, 255, 0.8);
         text-decoration: none;
         transition: color 0.3s ease;
+        font-size: 1.05rem;
         
         &:hover {
           color: var(--primary-color);
@@ -114,24 +133,32 @@
   }
   
   .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 2rem;
     text-align: center;
     
     p {
       color: rgba(255, 255, 255, 0.6);
       margin: 0;
+      font-size: 1rem;
     }
   }
 }
 
 @media (max-width: 768px) {
-  .footer-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-    
-    .social-links {
-      justify-content: center;
+  .footer-section {
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      
+      .social-links {
+        flex-direction: column;
+        align-items: center;
+        
+        .social-link {
+          width: 200px;
+        }
+      }
     }
   }
 }

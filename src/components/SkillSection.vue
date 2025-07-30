@@ -33,47 +33,79 @@ const skills = ref([
 
 <style lang="scss" scoped>
 .skill-section {
-  padding: 4rem 0;
+  min-height: 100vh;
+  width: 100vw;
+  padding: 0;
   background-color: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   .container {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
   }
   
   .section-title {
     text-align: center;
-    margin-bottom: 3rem;
-    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    font-size: 3.5rem;
     color: var(--text-color);
+    font-weight: 700;
   }
   
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
     
     .skill-item {
-      padding: 2rem;
+      padding: 2.5rem;
       background-color: var(--card-bg);
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
       
       &:hover {
-        transform: translateY(-5px);
+        transform: translateY(-8px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
       }
       
       h3 {
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         color: var(--primary-color);
-        font-size: 1.3rem;
+        font-size: 1.5rem;
+        font-weight: 600;
       }
       
       p {
         color: var(--text-secondary);
         line-height: 1.6;
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .skill-section {
+    .section-title {
+      font-size: 2.5rem;
+    }
+    
+    .skills-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      
+      .skill-item {
+        padding: 2rem;
       }
     }
   }

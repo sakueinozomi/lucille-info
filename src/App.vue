@@ -25,6 +25,25 @@ import FooterSection from './components/FooterSection.vue'
   text-align: left;
 }
 
+// 為每個 section 加入基礎樣式
+:deep(.info-section),
+:deep(.skill-section),
+:deep(.project-section),
+:deep(.experience-section) {
+  min-height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:deep(.footer-section) {
+  min-height: 40vh;
+  width: 100vw;
+  scroll-snap-align: start;
+}
+
 // CSS 變數定義
 :root {
   --primary-color: #646cff;
