@@ -9,9 +9,9 @@ import FooterSection from './components/FooterSection.vue'
 <template>
     <div id="app">
         <InfoSection />
+        <ExperienceSection />
         <SkillSection />
         <ProjectSection />
-        <ExperienceSection />
         <FooterSection />
     </div>
 </template>

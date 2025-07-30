@@ -17,8 +17,12 @@ import { ref } from 'vue'
 
 const skills = ref([
     {
-        name: 'Vue.js',
+        name: 'Vue2/Vue3',
         description: '現代前端框架開發'
+    },
+    {
+        name: 'Nuxt2/Nuxt3',
+        description: 'SEO友好的Vue.js框架'
     },
     {
         name: 'JavaScript',
@@ -62,7 +66,7 @@ const skills = ref([
     
     .skills-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
         gap: 2.5rem;
         
         .skill-item {
@@ -106,6 +110,7 @@ const skills = ref([
             
             .skill-item {
                 padding: 2rem;
+				cursor: pointer;
             }
         }
     }

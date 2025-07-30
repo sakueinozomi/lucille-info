@@ -2,20 +2,60 @@
     <section class="experience-section">
         <div class="container">
             <h2 class="section-title">工作經歷</h2>
-            <div class="timeline">
-                <div class="timeline-item" v-for="experience in experiences" :key="experience.id">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-period">{{ experience.period }}</div>
-                        <h3>{{ experience.position }}</h3>
-                        <h4>{{ experience.company }}</h4>
-                        <p>{{ experience.description }}</p>
-                        <ul class="responsibilities">
-                            <li v-for="responsibility in experience.responsibilities" :key="responsibility">
-                                {{ responsibility }}
-                            </li>
-                        </ul>
+            <div class="experience-slider">
+                <div class="slider-wrapper">
+                    <button 
+                        class="slider-btn prev-btn" 
+                        @click="prevSlide" 
+                        :disabled="currentSlide === 0"
+                    >
+                        ‹
+                    </button>
+                    
+                    <div class="slider-container" ref="sliderContainer">
+                        <div 
+                            class="slider-track" 
+                            :style="{ transform: `translateX(-${currentSlide * 85}%)` }"
+                        >
+                            <div 
+                                class="experience-card" 
+                                v-for="experience in experiences" 
+                                :key="experience.id"
+                            >
+                                <div class="card-header">
+                                    <div class="timeline-period">{{ experience.period }}</div>
+                                </div>
+                                <div class="card-content">
+                                    <h3>{{ experience.position }}</h3>
+                                    <h4>{{ experience.company }}</h4>
+                                    <p>{{ experience.description }}</p>
+                                    <ul class="responsibilities">
+                                        <li v-for="responsibility in experience.responsibilities" :key="responsibility">
+                                            {{ responsibility }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <button 
+                        class="slider-btn next-btn" 
+                        @click="nextSlide"
+                        :disabled="currentSlide === experiences.length - 1"
+                    >
+                        ›
+                    </button>
+                </div>
+                
+                <div class="slide-indicators">
+                    <span 
+                        v-for="(experience, index) in experiences" 
+                        :key="experience.id"
+                        class="indicator"
+                        :class="{ active: index === currentSlide }"
+                        @click="goToSlide(index)"
+                    ></span>
                 </div>
             </div>
         </div>
@@ -23,34 +63,123 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const currentSlide = ref(0)
+const sliderContainer = ref(null)
+let startX = 0
+let isDragging = false
 
 const experiences = ref([
     {
         id: 1,
-        period: '2023 - 現在',
+        period: '2024 - 現在',
         position: '前端工程師',
-        company: '科技公司 A',
-        description: '負責前端開發與使用者體驗優化',
+        company: '美商安瑞(ARRAY NETWORKS)',
+        description: '負責後台系統之前端開發',
         responsibilities: [
-            '開發響應式網頁應用程式',
-            '維護現有系統功能',
-            '與團隊協作完成專案'
+            '新產品架構設計,使用 Vue 3、Pinia、vue-router，導入新版 Element Plus與 ECharts,實現前後端分離並改善維運效率。',
+            '在舊系統中使用 Vue 2、jQuery維護現有系統功能，並持續在既有專案中增加新功能並維護。',
+            '維護舊專案之PHP前端頁面。'
         ]
     },
     {
         id: 2,
-        period: '2021 - 2023',
-        position: '初級前端工程師',
-        company: '科技公司 B',
-        description: '學習前端技術並參與專案開發',
+        period: '2022 - 2024',
+        position: '前端工程師',
+        company: 'PIXNET(城邦集團)',
+        description: '與後端團隊協作，並使用 Nuxt2 開發全新痞客幫首頁。',
         responsibilities: [
-            '學習 Vue.js 框架',
-            '協助完成網頁功能開發',
-            '參與程式碼審查'
+            '使用Nuxt2與各式套件進行前端頁面開發，以提升頁面SEO與翻新首頁畫面。',
+            '使用Vue2/Vue3進行活動頁面開發。',
+			'串接GA/MC等追蹤工具以蒐集使用者行為數據。'
         ]
-    }
+    },
+	{
+        id: 3,
+        period: '2018 - 2022',
+        position: '前端工程師',
+        company: '美商網碩(FriendFinder Network)',
+        description: '開發前端直播系統與登陸頁面',
+        responsibilities: [
+            '使用Angular8進行直播系統開發。',
+            '使用jQuery與原生JS建構登陸頁面。',
+			'串接hotjar，協助統計team收集使用者行為點擊數據。'
+        ]
+    },
+	{
+        id: 4,
+        period: '2017 - 2018',
+        position: 'PHP後端工程師',
+        company: '橙色數位',
+        description: '開發議程系統頁面',
+        responsibilities: [
+            '使用Angularjs進行議程系統頁面的前台與後台開發。',
+            '利用jQuery串接API協作前端功能。',
+			'PHP後端開發，使用CI框架進行資料庫操作。'
+        ]
+    },
 ])
+
+const nextSlide = () => {
+    if (currentSlide.value < experiences.value.length - 1) {
+        currentSlide.value++
+    }
+}
+
+const prevSlide = () => {
+    if (currentSlide.value > 0) {
+        currentSlide.value--
+    }
+}
+
+const goToSlide = (index) => {
+    currentSlide.value = index
+}
+
+// 觸控滑動支援
+const handleTouchStart = (e) => {
+    startX = e.touches[0].clientX
+    isDragging = true
+}
+
+const handleTouchMove = (e) => {
+    if (!isDragging) return
+    e.preventDefault()
+}
+
+const handleTouchEnd = (e) => {
+    if (!isDragging) return
+    isDragging = false
+    
+    const endX = e.changedTouches[0].clientX
+    const diffX = startX - endX
+    const threshold = 50
+    
+    if (Math.abs(diffX) > threshold) {
+        if (diffX > 0) {
+            nextSlide()
+        } else {
+            prevSlide()
+        }
+    }
+}
+
+onMounted(() => {
+    if (sliderContainer.value) {
+        sliderContainer.value.addEventListener('touchstart', handleTouchStart, { passive: true })
+        sliderContainer.value.addEventListener('touchmove', handleTouchMove, { passive: false })
+        sliderContainer.value.addEventListener('touchend', handleTouchEnd, { passive: true })
+    }
+})
+
+onUnmounted(() => {
+    if (sliderContainer.value) {
+        sliderContainer.value.removeEventListener('touchstart', handleTouchStart)
+        sliderContainer.value.removeEventListener('touchmove', handleTouchMove)
+        sliderContainer.value.removeEventListener('touchend', handleTouchEnd)
+    }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -82,114 +211,180 @@ const experiences = ref([
         font-weight: 700;
     }
     
-    .timeline {
+    .experience-slider {
+        width: 100%;
         position: relative;
-        max-height: 60vh;
-        overflow-y: auto;
-        padding-right: 1rem;
         
-        &::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        &::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
-        }
-        
-        &::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 3px;
-        }
-        
-        &::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background-color: var(--primary-color);
-        }
-        
-        .timeline-item {
+        .slider-wrapper {
             position: relative;
-            margin-bottom: 3rem;
-            padding-left: 60px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
             
-            .timeline-marker {
-                position: absolute;
-                left: 9px;
-                top: 0;
-                width: 22px;
-                height: 22px;
-                background-color: var(--primary-color);
+            .slider-btn {
+                background: rgba(239, 239, 239, 0.9);
+                color: #333333;
+                border: none;
+                font-weight: 600;
+                width: 50px;
                 border-radius: 50%;
-                border: 4px solid var(--bg-secondary);
-                z-index: 1;
+                font-size: 1.5rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                flex-shrink: 0;
+                
+                &.prev-btn {
+                    margin-right: 1rem;
+                }
+                
+                &.next-btn {
+                    margin-left: 1rem;
+                }
+                
+                &:hover:not(:disabled) {
+                    background: rgba(239, 239, 239, 1);
+                    transform: scale(1.1);
+                    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+                }
+                
+                &:disabled {
+                    background: rgba(239, 239, 239, 0.3);
+                    color: rgba(51, 51, 51, 0.3);
+                    cursor: not-allowed;
+                    transform: none;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+                }
             }
             
-            .timeline-content {
-                background-color: var(--card-bg);
-                padding: 2.5rem;
-                border-radius: 12px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            .slider-container {
+                overflow: hidden;
+                width: 100%;
+                position: relative;
+                flex: 1;
                 
-                &:hover {
-                    transform: translateX(10px);
-                    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-                }
-                
-                .timeline-period {
-                    color: var(--primary-color);
-                    font-weight: 700;
-                    font-size: 1rem;
-                    margin-bottom: 0.8rem;
-                    text-transform: uppercase;
-                    letter-spacing: 0.5px;
-                }
-                
-                h3 {
-                    color: var(--text-color);
-                    margin-bottom: 0.5rem;
-                    font-size: 1.6rem;
-                    font-weight: 600;
-                }
-                
-                h4 {
-                    color: var(--text-secondary);
-                    margin-bottom: 1.2rem;
-                    font-weight: 500;
-                    font-size: 1.1rem;
-                }
-                
-                p {
-                    color: var(--text-secondary);
-                    line-height: 1.7;
-                    margin-bottom: 1.8rem;
-                    font-size: 1.05rem;
-                }
-                
-                .responsibilities {
-                    list-style: none;
-                    padding: 0;
+                .slider-track {
+                    display: flex;
+                    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    width: 100%;
                     
-                    li {
-                        position: relative;
-                        padding-left: 1.8rem;
-                        margin-bottom: 0.8rem;
-                        color: var(--text-secondary);
-                        line-height: 1.6;
+                    .experience-card {
+                        flex: 0 0 85%;
+                        margin-right: 2rem;
+                        background-color: var(--card-bg);
+                        border-radius: 16px;
+                        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        overflow: hidden;
                         
-                        &::before {
-                            content: '▸';
-                            position: absolute;
-                            left: 0;
-                            color: var(--primary-color);
-                            font-weight: bold;
-                            font-size: 1.1rem;
+                        &:hover {
+                            transform: translateY(-8px);
+                            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+                        }
+                        
+                        .card-header {
+                            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+                            padding: 2rem;
+                            position: relative;
+                            color: white;
+                            
+                            .timeline-period {
+                                font-weight: 700;
+                                font-size: 1.1rem;
+                                text-transform: uppercase;
+                                letter-spacing: 1px;
+                                margin: 0;
+                            }
+                            
+                            .timeline-marker {
+                                position: absolute;
+                                top: 50%;
+                                right: 2rem;
+                                transform: translateY(-50%);
+                                width: 20px;
+                                height: 20px;
+                                background-color: rgba(255, 255, 255, 0.3);
+                                border: 3px solid white;
+                                border-radius: 50%;
+                            }
+                        }
+                        
+                        .card-content {
+                            padding: 2.5rem;
+                            
+                            h3 {
+                                color: var(--text-color);
+                                margin-bottom: 0.8rem;
+                                font-size: 1.8rem;
+                                font-weight: 600;
+                            }
+                            
+                            h4 {
+                                color: var(--text-secondary);
+                                margin-bottom: 1.5rem;
+                                font-weight: 500;
+                                font-size: 1.2rem;
+                            }
+                            
+                            p {
+                                color: var(--text-secondary);
+                                line-height: 1.7;
+                                margin-bottom: 2rem;
+                                font-size: 1.1rem;
+                            }
+                            
+                            .responsibilities {
+                                list-style: none;
+                                padding: 0;
+                                
+                                li {
+                                    position: relative;
+                                    padding-left: 2rem;
+                                    margin-bottom: 1rem;
+                                    color: var(--text-secondary);
+                                    line-height: 1.6;
+                                    font-size: 1.05rem;
+                                    
+                                    &::before {
+                                        content: '▸';
+                                        position: absolute;
+                                        left: 0;
+                                        color: var(--primary-color);
+                                        font-weight: bold;
+                                        font-size: 1.2rem;
+                                    }
+                                }
+                            }
                         }
                     }
+                }
+            }
+        }
+        
+        .slide-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            
+            .indicator {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: rgba(239, 239, 239, 0.3);
+                cursor: pointer;
+                transition: all 0.3s ease;
+                
+                &.active {
+                    background: rgba(239, 239, 239, 0.7);
+                    transform: scale(1.2);
+                }
+                
+                &:hover {
+                    background: rgba(239, 239, 239, 0.7);
                 }
             }
         }
@@ -202,16 +397,77 @@ const experiences = ref([
             font-size: 2.5rem;
         }
         
-        .timeline {
-            max-height: 70vh;
-            
-            .timeline-item {
-                .timeline-content {
-                    padding: 2rem;
+        .experience-slider {
+            .slider-wrapper {
+                .slider-btn {
+                    width: 40px;
+                    height: 40px;
+                    font-size: 1.2rem;
                     
-                    &:hover {
-                        transform: translateX(5px);
+                    &.prev-btn {
+                        margin-right: 0.5rem;
                     }
+                    
+                    &.next-btn {
+                        margin-left: 0.5rem;
+                    }
+                }
+                
+                .slider-container {
+                    .slider-track {
+                        .experience-card {
+                            flex: 0 0 90%;
+                            margin-right: 1rem;
+                            
+                            .card-header {
+                                padding: 1.5rem;
+                                
+                                .timeline-period {
+                                    font-size: 1rem;
+                                }
+                                
+                                .timeline-marker {
+                                    width: 16px;
+                                    height: 16px;
+                                    right: 1.5rem;
+                                }
+                            }
+                            
+                            .card-content {
+                                padding: 2rem;
+                                
+                                h3 {
+                                    font-size: 1.5rem;
+                                }
+                                
+                                h4 {
+                                    font-size: 1.1rem;
+                                }
+                                
+                                p {
+                                    font-size: 1rem;
+                                }
+                                
+                                .responsibilities li {
+                                    font-size: 1rem;
+                                    padding-left: 1.5rem;
+                                    
+                                    &::before {
+                                        font-size: 1.1rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            .slide-indicators {
+                gap: 0.5rem;
+                
+                .indicator {
+                    width: 10px;
+                    height: 10px;
                 }
             }
         }
