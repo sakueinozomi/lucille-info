@@ -24,6 +24,15 @@ html {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
+    // CSS 變數定義
+    --primary-color: #213547;
+    --primary-hover: #252925;
+    --bg-color: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-color: #213547;
+    --text-secondary: #666;
+    --card-bg: #ffffff;
 }
 
 a {

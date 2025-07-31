@@ -50,14 +50,4 @@ import FooterSection from './components/FooterSection.vue'
     width: 100vw;
     scroll-snap-align: start;
 }
-
-:root {
-    --primary-color: #646cff;
-    --primary-hover: #535bf2;
-    --bg-color: #ffffff;
-    --bg-secondary: #f8f9fa;
-    --text-color: #213547;
-    --text-secondary: #666;
-    --card-bg: #ffffff;
-}
 </style>

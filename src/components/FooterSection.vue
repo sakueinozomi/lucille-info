@@ -73,7 +73,7 @@
             text-align: center;
             
             h3 {
-                color: var(--primary-color);
+                color: var(--bg-color);
                 margin-bottom: 1.5rem;
                 font-size: 1.4rem;
                 font-weight: 600;
@@ -103,10 +103,10 @@
                 font-weight: 500;
                 
                 &:hover {
-                    color: var(--primary-color);
-                    border-color: var(--primary-color);
+                    color: #fff;
+                    border-color: #fff;
                     transform: translateY(-3px);
-                    box-shadow: 0 5px 15px rgba(100, 108, 255, 0.3);
+                    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
                 }
             }
         }

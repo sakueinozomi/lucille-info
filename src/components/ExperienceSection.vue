@@ -241,6 +241,7 @@ onUnmounted(() => {
                 border: none;
                 font-weight: 600;
                 width: 50px;
+                height: 50px;
                 border-radius: 50%;
                 font-size: 1.5rem;
                 cursor: pointer;
@@ -251,6 +252,7 @@ onUnmounted(() => {
                 z-index: 10;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
                 flex-shrink: 0;
+                outline: none;
                 
                 &.prev-btn {
                     margin-right: 1rem;

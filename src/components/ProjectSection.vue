@@ -311,6 +311,7 @@ onUnmounted(() => {
                 border: none;
                 font-weight: 600;
                 width: 50px;
+                height: 50px;
                 border-radius: 50%;
                 font-size: 1.5rem;
                 cursor: pointer;
@@ -321,6 +322,7 @@ onUnmounted(() => {
                 z-index: 10;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
                 flex-shrink: 0;
+                outline: none;
                 
                 &.prev-btn {
                     margin-right: 1rem;
@@ -419,6 +421,7 @@ onUnmounted(() => {
                                 .tech-tag {
                                     background-color: var(--primary-color);
                                     color: white;
+                                    border: 1px solid var(--primary-color);
                                     padding: 0.4rem 1rem;
                                     border-radius: 25px;
                                     font-size: 0.85rem;
@@ -487,7 +490,8 @@ onUnmounted(() => {
             background: rgba(0, 0, 0, 0.7);
             color: #fff;
             border: none;
-            width: 25px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             font-size: 1.5rem;
             cursor: pointer;
@@ -547,6 +551,7 @@ onUnmounted(() => {
                     color: white;
                     border: none;
                     width: 50px;
+                    height: 50px;
                     border-radius: 50%;
                     font-size: 1.5rem;
                     cursor: pointer;
