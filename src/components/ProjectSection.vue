@@ -135,8 +135,8 @@ const cardStyle = computed(() => {
 const projects = ref([
     {
         id: 1,
-        title: '痞客邦首頁',
-        description: '痞客邦全新首頁，翻新10年老頁面，規劃並實現前後端分離，提升SEO與使用者體驗。',
+        title: 'PIXNET首頁',
+        description: '痞客邦全新首頁，翻新10年老頁面，規劃並使用Nuxt2和Vuex實現前後端分離，提升SEO與使用者體驗。',
         image: `${baseUrl}sample/sample-5.png`,
         technologies: ['Nuxt2', 'SCSS', 'JavaScript'],
         type: 'site',
@@ -159,11 +159,20 @@ const projects = ref([
     {
         id: 3,
         title: '阿卡學院官網',
-        description: '這是另一個網站專案的描述',
+        description: '接案前端官網，使用Nuxt3與Vite進行開發。',
         image: `${baseUrl}sample/sample-6.png`,
         technologies: ['Nuxt3', 'Vite'],
         type: 'site',
         url: 'https://drop-point-server-dev22.zeabur.app'
+    },
+	{
+        id: 4,
+        title: 'PIXNET活動網站',
+        description: '接案前端活動網站，使用Vue3與Vuex進行開發。',
+        image: `${baseUrl}sample/sample-7.png`,
+        technologies: ['Vue3', 'Vuex'],
+        type: 'site',
+        url: 'https://2023carrefour-ricedumpling.events.pixnet.net/'
     }
 ])
 
@@ -311,7 +320,6 @@ onUnmounted(() => {
                 border: none;
                 font-weight: 600;
                 width: 50px;
-                height: 50px;
                 border-radius: 50%;
                 font-size: 1.5rem;
                 cursor: pointer;
