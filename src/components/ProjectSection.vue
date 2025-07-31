@@ -15,7 +15,10 @@
                     <div class="slider-container" ref="sliderContainer">
                         <div 
                             class="slider-track" 
-                            :style="{ transform: `translateX(-${currentSlide * 85}%)` }"
+                            :style="{ 
+                                transform: `translateX(-${currentSlide * (100 / projects.length)}%)`,
+                                width: `${projects.length * 100}%`
+                            }"
                         >
                             <div 
                                 class="project-card" 
@@ -23,17 +26,20 @@
                                 :key="project.id"
                                 @click="handleCardClick(project)"
                                 :class="{ 'clickable': true }"
+                                :style="cardStyle"
                             >
-                                <div class="project-image">
-                                    <img :src="project.image" :alt="project.title" />
-                                </div>
-                                <div class="project-content">
-                                    <h3>{{ project.title }}</h3>
-                                    <p>{{ project.description }}</p>
-                                    <div class="project-tech">
-                                        <span v-for="tech in project.technologies" :key="tech" class="tech-tag">
-                                            {{ tech }}
-                                        </span>
+                                <div class="project-card-inner">
+                                    <div class="project-image">
+                                        <img :src="project.image" :alt="project.title" />
+                                    </div>
+                                    <div class="project-content">
+                                        <h3>{{ project.title }}</h3>
+                                        <p>{{ project.description }}</p>
+                                        <div class="project-tech">
+                                            <span v-for="tech in project.technologies" :key="tech" class="tech-tag">
+                                                {{ tech }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +111,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const currentSlide = ref(0)
 const sliderContainer = ref(null)
@@ -116,6 +122,15 @@ let startX = 0
 let isDragging = false
 
 const baseUrl = import.meta.env.BASE_URL
+
+// 計算卡片寬度
+const cardStyle = computed(() => {
+    const totalProjects = projects.value.length
+    // 每張卡片佔據 slider-track 總寬度的 1/totalProjects
+    return {
+        width: `${100 / totalProjects}%`
+    }
+})
 
 const projects = ref([
     {
@@ -146,9 +161,9 @@ const projects = ref([
         title: '專案網站 2',
         description: '這是另一個網站專案的描述',
         image: `${baseUrl}sample/sample-3.png`,
-        technologies: ['Vue.js', 'TypeScript', 'Vite'],
+        technologies: ['Nuxt3', 'Pinia', 'Vite'],
         type: 'site',
-        url: 'https://example2.com'
+        url: 'https://drop-point-server-dev22.zeabur.app'
     }
 ])
 
@@ -339,19 +354,24 @@ onUnmounted(() => {
                 .slider-track {
                     display: flex;
                     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                    width: 100%;
                     
                     .project-card {
-                        flex: 0 0 85%;
-                        margin-right: 2rem;
-                        background-color: var(--card-bg);
-                        border-radius: 16px;
-                        overflow: hidden;
-                        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-                        transition: transform 0.3s ease, box-shadow 0.3s ease;
+                        flex-shrink: 0;
+                        background-color: transparent;
                         cursor: pointer;
+                        padding: 0 1rem;
+                        box-sizing: border-box;
                         
-                        &.clickable:hover {
+                        .project-card-inner {
+                            background-color: var(--card-bg);
+                            border-radius: 16px;
+                            overflow: hidden;
+                            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+                            transition: transform 0.3s ease, box-shadow 0.3s ease;
+                            height: 100%;
+                        }
+                        
+                        &.clickable:hover .project-card-inner {
                             transform: translateY(-10px);
                             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
                         }
@@ -461,30 +481,31 @@ onUnmounted(() => {
                 .slider-container {
                     .slider-track {
                         .project-card {
-                            flex: 0 0 90%;
-                            margin-right: 1rem;
+                            padding: 0 0.5rem;
                             
-                            .project-image {
-                                height: 180px;
-                            }
-                            
-                            .project-content {
-                                padding: 1.5rem;
-                                
-                                h3 {
-                                    font-size: 1.4rem;
+                            .project-card-inner {
+                                .project-image {
+                                    height: 180px;
                                 }
                                 
-                                p {
-                                    font-size: 1rem;
-                                }
-                                
-                                .project-tech {
-                                    gap: 0.4rem;
+                                .project-content {
+                                    padding: 1.5rem;
                                     
-                                    .tech-tag {
-                                        font-size: 0.8rem;
-                                        padding: 0.3rem 0.8rem;
+                                    h3 {
+                                        font-size: 1.4rem;
+                                    }
+                                    
+                                    p {
+                                        font-size: 1rem;
+                                    }
+                                    
+                                    .project-tech {
+                                        gap: 0.4rem;
+                                        
+                                        .tech-tag {
+                                            font-size: 0.8rem;
+                                            padding: 0.3rem 0.8rem;
+                                        }
                                     }
                                 }
                             }
