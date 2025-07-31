@@ -41,8 +41,8 @@
 
 <style lang="scss" scoped>
 .footer-section {
-    background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a2e 100%);
-    color: var(--text-light);
+    background: linear-gradient(135deg, #242424 0%, #1a1a2e 100%);
+    color: rgba(255, 255, 255, 0.87);
     min-height: 40vh;
     width: 100vw;
     padding: 3rem 0;

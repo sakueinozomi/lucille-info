@@ -56,10 +56,8 @@ import FooterSection from './components/FooterSection.vue'
     --primary-hover: #535bf2;
     --bg-color: #ffffff;
     --bg-secondary: #f8f9fa;
-    --bg-dark: #242424;
     --text-color: #213547;
     --text-secondary: #666;
-    --text-light: rgba(255, 255, 255, 0.87);
     --card-bg: #ffffff;
 }
 </style>

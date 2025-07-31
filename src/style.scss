@@ -1,12 +1,5 @@
 $primary-color: #646cff;
 $primary-hover: #535bf2;
-$primary-hover-light: #747bff;
-$bg-dark: #252925;
-$bg-light: #ffffff;
-$text-dark: rgba(255, 255, 255, 0.87);
-$text-light: #213547;
-$button-bg-dark: #1a1a1a;
-$button-bg-light: #f9f9f9;
 
 * {
     margin: 0;
@@ -24,9 +17,8 @@ html {
     line-height: 1.5;
     font-weight: 400;
 
-    color-scheme: light dark;
-    color: $text-dark;
-    background-color: $bg-dark;
+    color: #213547;
+    background-color: #ffffff;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -62,7 +54,7 @@ button {
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
-    background-color: $button-bg-dark;
+    background-color: #f9f9f9;
     cursor: pointer;
     transition: border-color 0.25s;
     
