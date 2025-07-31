@@ -15,25 +15,31 @@
                     <div class="slider-container" ref="sliderContainer">
                         <div 
                             class="slider-track" 
-                            :style="{ transform: `translateX(-${currentSlide * 85}%)` }"
+                            :style="{ 
+                                transform: `translateX(-${currentSlide * (100 / experiences.length)}%)`,
+                                width: `${experiences.length * 100}%`
+                            }"
                         >
                             <div 
                                 class="experience-card" 
                                 v-for="experience in experiences" 
                                 :key="experience.id"
+                                :style="cardStyle"
                             >
-                                <div class="card-header">
-                                    <div class="timeline-period">{{ experience.period }}</div>
-                                </div>
-                                <div class="card-content">
-                                    <h3>{{ experience.position }}</h3>
-                                    <h4>{{ experience.company }}</h4>
-                                    <p>{{ experience.description }}</p>
-                                    <ul class="responsibilities">
-                                        <li v-for="responsibility in experience.responsibilities" :key="responsibility">
-                                            {{ responsibility }}
-                                        </li>
-                                    </ul>
+                                <div class="experience-card-inner">
+                                    <div class="card-header">
+                                        <div class="timeline-period">{{ experience.period }}</div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h3>{{ experience.position }}</h3>
+                                        <h4>{{ experience.company }}</h4>
+                                        <p>{{ experience.description }}</p>
+                                        <ul class="responsibilities">
+                                            <li v-for="responsibility in experience.responsibilities" :key="responsibility">
+                                                {{ responsibility }}
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -63,12 +69,20 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 
 const currentSlide = ref(0)
 const sliderContainer = ref(null)
 let startX = 0
 let isDragging = false
+
+// 計算卡片寬度
+const cardStyle = computed(() => {
+    const totalExperiences = experiences.value.length
+    return {
+        width: `${100 / totalExperiences}%`
+    }
+})
 
 const experiences = ref([
     {
@@ -273,15 +287,20 @@ onUnmounted(() => {
                     width: 100%;
                     
                     .experience-card {
-                        flex: 0 0 85%;
-                        margin-right: 2rem;
-                        background-color: var(--card-bg);
-                        border-radius: 16px;
-                        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
-                        transition: transform 0.3s ease, box-shadow 0.3s ease;
-                        overflow: hidden;
+                        flex-shrink: 0;
+                        padding: 0 1rem;
+                        box-sizing: border-box;
                         
-                        &:hover {
+                        .experience-card-inner {
+                            background-color: var(--card-bg);
+                            border-radius: 16px;
+                            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+                            transition: transform 0.3s ease, box-shadow 0.3s ease;
+                            overflow: hidden;
+                            height: 100%;
+                        }
+                        
+                        &:hover .experience-card-inner {
                             transform: translateY(-8px);
                             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
                         }
@@ -415,44 +434,45 @@ onUnmounted(() => {
                 .slider-container {
                     .slider-track {
                         .experience-card {
-                            flex: 0 0 90%;
-                            margin-right: 1rem;
+                            padding: 0 0.5rem;
                             
-                            .card-header {
-                                padding: 1.5rem;
-                                
-                                .timeline-period {
-                                    font-size: 1rem;
-                                }
-                                
-                                .timeline-marker {
-                                    width: 16px;
-                                    height: 16px;
-                                    right: 1.5rem;
-                                }
-                            }
-                            
-                            .card-content {
-                                padding: 2rem;
-                                
-                                h3 {
-                                    font-size: 1.5rem;
-                                }
-                                
-                                h4 {
-                                    font-size: 1.1rem;
-                                }
-                                
-                                p {
-                                    font-size: 1rem;
-                                }
-                                
-                                .responsibilities li {
-                                    font-size: 1rem;
-                                    padding-left: 1.5rem;
+                            .experience-card-inner {
+                                .card-header {
+                                    padding: 1.5rem;
                                     
-                                    &::before {
+                                    .timeline-period {
+                                        font-size: 1rem;
+                                    }
+                                    
+                                    .timeline-marker {
+                                        width: 16px;
+                                        height: 16px;
+                                        right: 1.5rem;
+                                    }
+                                }
+                                
+                                .card-content {
+                                    padding: 2rem;
+                                    
+                                    h3 {
+                                        font-size: 1.5rem;
+                                    }
+                                    
+                                    h4 {
                                         font-size: 1.1rem;
+                                    }
+                                    
+                                    p {
+                                        font-size: 1rem;
+                                    }
+                                    
+                                    .responsibilities li {
+                                        font-size: 1rem;
+                                        padding-left: 1.5rem;
+                                        
+                                        &::before {
+                                            font-size: 1.1rem;
+                                        }
                                     }
                                 }
                             }
