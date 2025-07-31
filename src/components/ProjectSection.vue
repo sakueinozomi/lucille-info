@@ -136,7 +136,7 @@ const projects = ref([
     {
         id: 1,
         title: '痞客邦首頁',
-        description: '痞客邦全新首頁',
+        description: '痞客邦全新首頁，翻新10年老頁面，規劃並實現前後端分離，提升SEO與使用者體驗。',
         image: `${baseUrl}sample/sample-5.png`,
         technologies: ['Nuxt2', 'SCSS', 'JavaScript'],
         type: 'site',
@@ -145,7 +145,7 @@ const projects = ref([
     {
         id: 2,
         title: 'Array APV後台前端',
-        description: '這是一個設計作品的圖片集',
+        description: 'Array APV後台前端系統，使用Vue3與Pinia進行開發。',
         image: `${baseUrl}sample/sample-2.png`,
         technologies: ['Vue3', 'Pinia', 'UI/UX'],
         type: 'image',
@@ -158,10 +158,10 @@ const projects = ref([
     },
     {
         id: 3,
-        title: '專案網站 2',
+        title: '阿卡學院官網',
         description: '這是另一個網站專案的描述',
-        image: `${baseUrl}sample/sample-3.png`,
-        technologies: ['Nuxt3', 'Pinia', 'Vite'],
+        image: `${baseUrl}sample/sample-6.png`,
+        technologies: ['Nuxt3', 'Vite'],
         type: 'site',
         url: 'https://drop-point-server-dev22.zeabur.app'
     }
@@ -544,7 +544,7 @@ onUnmounted(() => {
         position: relative;
         max-width: 90vw;
         max-height: 90vh;
-        background: white;
+        background: rgba(0, 0, 0, 0.7);
         border-radius: 12px;
         overflow: hidden;
         animation: slideUp 0.3s ease;
@@ -554,10 +554,9 @@ onUnmounted(() => {
             top: 15px;
             right: 15px;
             background: rgba(0, 0, 0, 0.7);
-            color: white;
+            color: #fff;
             border: none;
-            width: 35px;
-            height: 35px;
+            width: 25px;
             border-radius: 50%;
             font-size: 1.5rem;
             cursor: pointer;
@@ -617,7 +616,6 @@ onUnmounted(() => {
                     color: white;
                     border: none;
                     width: 50px;
-                    height: 50px;
                     border-radius: 50%;
                     font-size: 1.5rem;
                     cursor: pointer;

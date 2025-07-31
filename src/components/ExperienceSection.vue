@@ -92,8 +92,8 @@ const experiences = ref([
         company: '美商安瑞(ARRAY NETWORKS)',
         description: '負責後台系統之前端開發',
         responsibilities: [
-            '新產品架構設計,使用 Vue 3、Pinia、vue-router，導入新版 Element Plus與 ECharts,實現前後端分離並改善維運效率。',
-            '在舊系統中使用 Vue 2、jQuery維護現有系統功能，並持續在既有專案中增加新功能並維護。',
+            '新產品架構設計,使用Vue 3、Pinia、vue-router，導入新版Element Plus與 ECharts，實現前後端分離並改善維運效率。',
+            '在舊系統中使用Vue 2、jQuery維護現有系統功能，並持續在既有專案中增加新功能並維護。',
             '維護舊專案之PHP前端頁面。'
         ]
     },
@@ -102,7 +102,7 @@ const experiences = ref([
         period: '2022 - 2024',
         position: '前端工程師',
         company: 'PIXNET(城邦集團)',
-        description: '與後端團隊協作，並使用 Nuxt2 開發全新痞客邦首頁。',
+        description: '與後端團隊協作，並使用Nuxt2開發全新痞客邦首頁。',
         responsibilities: [
             '使用Nuxt2與各式套件進行前端頁面開發，以提升頁面SEO與翻新首頁畫面。',
             '使用Vue2/Vue3進行活動頁面開發。',
@@ -118,7 +118,7 @@ const experiences = ref([
         responsibilities: [
             '使用Angular8進行直播系統開發。',
             '使用jQuery與原生JS建構登陸頁面。',
-			'串接hotjar，協助統計team收集使用者行為點擊數據。'
+			'串接Hotjar，協助統計team收集使用者行為點擊數據。'
         ]
     },
 	{
