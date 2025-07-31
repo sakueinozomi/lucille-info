@@ -66,16 +66,4 @@
         }
     }
 }
-
-@media (max-width: 768px) {
-    .info-section {
-        .section-title {
-            font-size: 2.5rem;
-        }
-        
-        .info-content .info-text {
-            font-size: 1.1rem;
-        }
-    }
-}
 </style>

@@ -13,6 +13,14 @@ import FooterSection from './components/FooterSection.vue'
         <SkillSection />
         <ProjectSection />
         <FooterSection />
+        <div class="screen-size-warning">
+            <div class="warning-icon">�</div>
+            <div class="warning-title">請使用桌機或筆電觀看</div>
+            <div class="warning-message">
+                此為簡報用途設計<br>
+                建議使用桌機或筆電瀏覽以獲得最佳體驗
+            </div>
+        </div>
     </div>
 </template>
 
@@ -25,7 +33,6 @@ import FooterSection from './components/FooterSection.vue'
     text-align: left;
 }
 
-// 為每個 section 加入基礎樣式
 :deep(.info-section),
 :deep(.skill-section),
 :deep(.project-section),
@@ -44,7 +51,6 @@ import FooterSection from './components/FooterSection.vue'
     scroll-snap-align: start;
 }
 
-// CSS 變數定義
 :root {
     --primary-color: #646cff;
     --primary-hover: #535bf2;
@@ -55,15 +61,5 @@ import FooterSection from './components/FooterSection.vue'
     --text-secondary: #666;
     --text-light: rgba(255, 255, 255, 0.87);
     --card-bg: #ffffff;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg-color: #1a1a1a;
-        --bg-secondary: #242424;
-        --text-color: rgba(255, 255, 255, 0.87);
-        --text-secondary: rgba(255, 255, 255, 0.7);
-        --card-bg: #2a2a2a;
-    }
 }
 </style>

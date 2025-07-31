@@ -142,22 +142,4 @@
         }
     }
 }
-
-@media (max-width: 768px) {
-    .footer-section {
-        .footer-content {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-                
-                .social-link {
-                    width: 200px;
-                }
-            }
-        }
-    }
-}
 </style>

@@ -97,22 +97,4 @@ const skills = ref([
         }
     }
 }
-
-@media (max-width: 768px) {
-    .skill-section {
-        .section-title {
-            font-size: 2.5rem;
-        }
-        
-        .skills-grid {
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            
-            .skill-item {
-                padding: 2rem;
-				cursor: pointer;
-            }
-        }
-    }
-}
 </style>
