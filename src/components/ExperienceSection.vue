@@ -92,9 +92,9 @@ const experiences = ref([
         company: '美商安瑞(ARRAY NETWORKS)',
         description: '負責後台系統之前端開發',
         responsibilities: [
-            '新產品架構設計,使用Vue 3、Pinia、vue-router，導入新版Element Plus與 ECharts，實現前後端分離並改善維運效率。',
-            '在舊系統中使用Vue 2、jQuery維護現有系統功能，並持續在既有專案中增加新功能並維護。',
-            '維護舊專案之PHP前端頁面。'
+            '新產品架構設計,使用 Vue 3、Pinia、vue-router，導入新版 Element Plus 與 ECharts，實現前後端分離並改善維運效率。',
+            '在舊系統中使用 Vue 2、jQuery 維護現有系統功能，並持續在既有專案中增加新功能並維護。',
+            '維護舊專案之 PHP 前端頁面。'
         ]
     },
     {
@@ -102,11 +102,11 @@ const experiences = ref([
         period: '2022 - 2024',
         position: '前端工程師',
         company: 'PIXNET(城邦集團)',
-        description: '與後端團隊協作，並使用Nuxt2開發全新痞客邦首頁。',
+        description: '與後端團隊協作，並使用 Nuxt2 開發全新痞客邦首頁。',
         responsibilities: [
-            '使用Nuxt2與各式套件進行前端頁面開發，以提升頁面SEO與翻新首頁畫面。',
-            '使用Vue2/Vue3進行活動頁面開發。',
-			'串接GA/MC等追蹤工具以蒐集使用者行為數據。'
+            '使用 Nuxt2 與各式套件進行前端頁面開發，以提升頁面 SEO 與翻新首頁畫面。',
+            '使用 Vue2/Vue3 進行活動頁面開發。',
+			'串接 GA/MC 等追蹤工具以蒐集使用者行為數據。'
         ]
     },
 	{
@@ -116,21 +116,21 @@ const experiences = ref([
         company: '美商網碩(FriendFinder Network)',
         description: '開發前端直播系統與登陸頁面',
         responsibilities: [
-            '使用Angular8進行直播系統開發。',
-            '使用jQuery與原生JS建構登陸頁面。',
-			'串接Hotjar，協助統計team收集使用者行為點擊數據。'
+            '使用 Angular8 進行直播系統開發。',
+            '使用 jQuery 與原生 JS 建構登陸頁面。',
+			'串接 Hotjar，協助統計 team 收集使用者行為點擊數據。'
         ]
     },
 	{
         id: 4,
         period: '2017 - 2018',
-        position: 'PHP後端工程師',
+        position: 'PHP 後端工程師',
         company: '橙色數位',
         description: '開發議程系統頁面',
         responsibilities: [
-            '使用Angularjs進行議程系統頁面的前台與後台開發。',
-            '利用jQuery串接API協作前端功能。',
-			'PHP後端開發，使用CI框架進行資料庫操作。'
+            '使用 Angularjs 進行議程系統頁面的前台與後台開發。',
+            '利用 jQuery 串接 API 協作前端功能。',
+			'PHP 後端開發，使用 CI 框架進行資料庫操作。'
         ]
     },
 ])

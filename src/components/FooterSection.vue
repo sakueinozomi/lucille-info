@@ -29,7 +29,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025個人簡報｜作品集</p>
+                <p>&copy; 2025 個人簡報｜作品集</p>
             </div>
         </div>
     </footer>

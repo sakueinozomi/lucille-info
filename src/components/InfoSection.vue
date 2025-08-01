@@ -11,7 +11,7 @@
 						Front-End Developer | Vue Ecosystem Enthusiast
 					</p>
 					<p>
-						6年以上前端開發經驗，使用Vue/Nuxt架構，進行前端系統重構、與跨國團隊協作。
+						6 年以上前端開發經驗，使用 Vue/Nuxt 架構，進行前端系統重構、與跨國團隊協作。
 					</p>
                 </div>
             </div>

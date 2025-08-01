@@ -22,7 +22,7 @@ const skills = ref([
     },
     {
         name: 'Nuxt2/Nuxt3',
-        description: 'SEO友好的Vue.js框架'
+        description: 'SEO 友好的 Vue.js 框架'
     },
     {
         name: 'JavaScript',
