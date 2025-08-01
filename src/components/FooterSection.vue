@@ -5,7 +5,7 @@
                 <div class="footer-info">
                     <h3>聯絡資訊</h3>
                     <div class="contact-info">
-                        <p>Email: sakuei@gmail.com</p>
+                        <p>Email：sakuei@gmail.com</p>
                     </div>
                 </div>
                 
@@ -29,7 +29,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 個人簡報. All rights reserved.</p>
+                <p>&copy; 2025個人簡報｜作品集</p>
             </div>
         </div>
     </footer>
