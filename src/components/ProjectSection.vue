@@ -168,7 +168,7 @@ const projects = ref([
 	{
         id: 4,
         title: 'PIXNET 活動網站',
-        description: '接案前端活動網站，使用 Vue3 與 Vuex 進行開發。',
+        description: '公司合作接案之前端活動網站，使用 Vue3 與 Vuex 進行開發。',
         image: `${baseUrl}sample/sample-7.png`,
         technologies: ['Vue3', 'Vuex'],
         type: 'site',

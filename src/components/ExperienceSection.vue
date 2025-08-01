@@ -92,7 +92,7 @@ const experiences = ref([
         company: '美商安瑞(ARRAY NETWORKS)',
         description: '負責後台系統之前端開發',
         responsibilities: [
-            '新產品架構設計,使用 Vue 3、Pinia、vue-router，導入新版 Element Plus 與 ECharts，實現前後端分離並改善維運效率。',
+            '新產品架構設計，使用 Vue 3、Pinia、vue-router，導入新版 Element Plus 與 ECharts，實現前後端分離並改善維運效率。',
             '在舊系統中使用 Vue 2、jQuery 維護現有系統功能，並持續在既有專案中增加新功能並維護。',
             '維護舊專案之 PHP 前端頁面。'
         ]
