@@ -14,6 +14,7 @@
                     <div class="social-links">
                         <a href="https://github.com/sakueinozomi" class="social-link">GitHub</a>
                         <a href="https://tw.linkedin.com/in/lucille-chiang-52a21516b" class="social-link">LinkedIn</a>
+						<a href="https://codepen.io/sakueinozomi" class="social-link">CodePen</a>
                     </div>
                 </div>
                 
