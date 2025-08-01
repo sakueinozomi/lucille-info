@@ -30,7 +30,11 @@
                             >
                                 <div class="project-card-inner">
                                     <div class="project-image">
-                                        <img :src="project.image" :alt="project.title" />
+                                        <picture>
+                                            <source :srcset="getOptimizedImagePath(project.image, 'avif')" type="image/avif">
+                                            <source :srcset="getOptimizedImagePath(project.image, 'webp')" type="image/webp">
+                                            <img :src="project.image" :alt="project.title" />
+                                        </picture>
                                     </div>
                                     <div class="project-content">
                                         <h3>{{ project.title }}</h3>
@@ -82,11 +86,15 @@
                             @click="prevLightboxImage"
                             :disabled="currentLightboxImageIndex === 0"
                         >‹</button>
-                        <img 
-                            :src="currentProject.images?.[currentLightboxImageIndex]" 
-                            :alt="`${currentProject.title} - 圖片 ${currentLightboxImageIndex + 1}`"
-                            class="lightbox-image"
-                        />
+                        <picture>
+                            <source :srcset="getOptimizedImagePath(currentProject.images?.[currentLightboxImageIndex], 'avif')" type="image/avif">
+                            <source :srcset="getOptimizedImagePath(currentProject.images?.[currentLightboxImageIndex], 'webp')" type="image/webp">
+                            <img 
+                                :src="currentProject.images?.[currentLightboxImageIndex]" 
+                                :alt="`${currentProject.title} - 圖片 ${currentLightboxImageIndex + 1}`"
+                                class="lightbox-image"
+                            />
+                        </picture>
                         <button 
                             class="lightbox-nav next" 
                             @click="nextLightboxImage"
@@ -94,15 +102,21 @@
                         >›</button>
                     </div>
                     <div class="lightbox-thumbnails">
-                        <img 
+                        <picture 
                             v-for="(image, index) in currentProject.images" 
                             :key="index"
-                            :src="image" 
-                            :alt="`縮圖 ${index + 1}`"
-                            class="lightbox-thumbnail"
+                            class="lightbox-thumbnail-wrapper"
                             :class="{ active: index === currentLightboxImageIndex }"
                             @click="currentLightboxImageIndex = index"
-                        />
+                        >
+                            <source :srcset="getOptimizedImagePath(image, 'avif')" type="image/avif">
+                            <source :srcset="getOptimizedImagePath(image, 'webp')" type="image/webp">
+                            <img 
+                                :src="image" 
+                                :alt="`縮圖 ${index + 1}`"
+                                class="lightbox-thumbnail"
+                            />
+                        </picture>
                     </div>
                 </div>
             </div>
@@ -122,6 +136,18 @@ let startX = 0
 let isDragging = false
 
 const baseUrl = import.meta.env.BASE_URL
+
+// 取得優化圖片路徑的函數
+const getOptimizedImagePath = (imagePath, format) => {
+    if (!imagePath) return ''
+    
+    // 如果是外部 URL，直接返回原路徑
+    if (imagePath.startsWith('http')) return imagePath
+    
+    // 將 .png/.jpg/.jpeg 替換為指定格式
+    const optimizedPath = imagePath.replace(/\.(png|jpg|jpeg)$/i, `.${format}`)
+    return optimizedPath
+}
 
 // 計算卡片寬度
 const cardStyle = computed(() => {
@@ -391,6 +417,12 @@ onUnmounted(() => {
                             height: 400px;
                             overflow: hidden;
                             
+                            picture {
+                                width: 100%;
+                                height: 100%;
+                                display: block;
+                            }
+                            
                             img {
                                 width: 100%;
                                 height: 100%;
@@ -595,15 +627,16 @@ onUnmounted(() => {
                 background: var(--card-bg);
                 overflow-x: auto;
                 
-                .lightbox-thumbnail {
+                .lightbox-thumbnail-wrapper {
                     width: 60px;
                     height: 40px;
-                    object-fit: cover;
                     border-radius: 4px;
                     cursor: pointer;
                     transition: all 0.3s ease;
                     opacity: 0.6;
                     border: 2px solid transparent;
+                    overflow: hidden;
+                    flex-shrink: 0;
                     
                     &:hover {
                         opacity: 0.8;
@@ -612,6 +645,13 @@ onUnmounted(() => {
                     &.active {
                         opacity: 1;
                         border-color: var(--primary-color);
+                    }
+                    
+                    .lightbox-thumbnail {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 2px;
                     }
                 }
             }
