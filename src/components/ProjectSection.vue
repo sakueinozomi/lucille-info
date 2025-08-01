@@ -31,7 +31,6 @@
                                 <div class="project-card-inner">
                                     <div class="project-image">
                                         <picture>
-                                            <source :srcset="getOptimizedImagePath(project.image, 'avif')" type="image/avif">
                                             <source :srcset="getOptimizedImagePath(project.image, 'webp')" type="image/webp">
                                             <img :src="project.image" :alt="project.title" />
                                         </picture>
