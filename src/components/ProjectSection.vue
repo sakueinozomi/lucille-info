@@ -86,7 +86,6 @@
                             :disabled="currentLightboxImageIndex === 0"
                         >‹</button>
                         <picture>
-                            <source :srcset="getOptimizedImagePath(currentProject.images?.[currentLightboxImageIndex], 'avif')" type="image/avif">
                             <source :srcset="getOptimizedImagePath(currentProject.images?.[currentLightboxImageIndex], 'webp')" type="image/webp">
                             <img 
                                 :src="currentProject.images?.[currentLightboxImageIndex]" 
@@ -162,7 +161,7 @@ const projects = ref([
         id: 1,
         title: 'PIXNET 首頁',
         description: '痞客邦全新首頁，翻新 10 年老頁面，規劃並使用 Nuxt2 和 Vuex 實現前後端分離，提升 SEO 與使用者體驗。',
-        image: `${baseUrl}sample/sample-5.png`,
+        image: `${baseUrl}sample/sample-5.webp`,
         technologies: ['Nuxt2', 'SCSS', 'JavaScript'],
         type: 'site',
         url: 'https://www.pixnet.net/'
@@ -171,21 +170,21 @@ const projects = ref([
         id: 2,
         title: 'Array APV 後台前端',
         description: 'Array APV 後台前端系統，使用 Vue3 與 Pinia 進行開發。',
-        image: `${baseUrl}sample/sample-2.png`,
+        image: `${baseUrl}sample/sample-2.webp`,
         technologies: ['Vue3', 'Pinia', 'UI/UX'],
         type: 'image',
         images: [
-            `${baseUrl}sample/sample-2.png`,
-            `${baseUrl}sample/sample-3.png`,
-            `${baseUrl}sample/sample-4.png`,
-            `${baseUrl}sample/sample-1.png`
+            `${baseUrl}sample/sample-2.webp`,
+            `${baseUrl}sample/sample-3.webp`,
+            `${baseUrl}sample/sample-4.webp`,
+            `${baseUrl}sample/sample-1.webp`
         ]
     },
     {
         id: 3,
         title: '阿卡學院官網',
         description: '接案前端官網，使用 Nuxt3 與 Vite 進行開發。',
-        image: `${baseUrl}sample/sample-6.png`,
+        image: `${baseUrl}sample/sample-6.webp`,
         technologies: ['Nuxt3', 'Vite'],
         type: 'site',
         url: 'https://drop-point-server-dev22.zeabur.app'
@@ -194,7 +193,7 @@ const projects = ref([
         id: 4,
         title: 'PIXNET 活動網站',
         description: '公司合作接案之前端活動網站，使用 Vue3 與 Vuex 進行開發。',
-        image: `${baseUrl}sample/sample-7.png`,
+        image: `${baseUrl}sample/sample-7.webp`,
         technologies: ['Vue3', 'Vuex'],
         type: 'site',
         url: 'https://2023carrefour-ricedumpling.events.pixnet.net/'
