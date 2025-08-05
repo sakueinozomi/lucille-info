@@ -529,7 +529,6 @@ onUnmounted(() => {
             color: #fff;
             border: none;
             width: 35px;
-            height: 35px;
             border-radius: 50%;
             font-size: 1.5rem;
             cursor: pointer;
